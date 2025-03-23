@@ -1,8 +1,9 @@
 import fp from 'fastify-plugin'
 import fastifyEnv, { FastifyEnvOptions } from '@fastify/env'
-import { Env } from '@/types'
+import { PLUGIN_ENV_NAME } from '@/constants'
+import '@/types'
 
-const schema = {
+const schema: FastifyEnvOptions['schema'] = {
   type: 'object',
   required: ['DATABASE_URL'],
   properties: {
@@ -15,13 +16,5 @@ const schema = {
 
 export default fp<FastifyEnvOptions>(
   async (fastify) => fastify.register(fastifyEnv, { schema }),
-  {
-    name: 'plugins/env',
-  }
+  { name: PLUGIN_ENV_NAME }
 )
-
-declare module 'fastify' {
-  interface FastifyInstance {
-    config: Env
-  }
-}

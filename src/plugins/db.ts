@@ -1,5 +1,7 @@
 import fp from 'fastify-plugin'
 import mongoose from 'mongoose'
+import { PLUGIN_ENV_NAME } from '@/constants'
+import '@/types'
 
 export default fp(
   async (fastify) => {
@@ -10,13 +12,5 @@ export default fp(
         fastifyInstance.db.close().then(() => done())
       })
   },
-  {
-    dependencies: ['plugins/env'],
-  }
+  { dependencies: [PLUGIN_ENV_NAME] }
 )
-
-declare module 'fastify' {
-  interface FastifyInstance {
-    db: typeof mongoose.connection
-  }
-}

@@ -9,9 +9,7 @@ const app: FastifyPluginAsync<AppOptions> = async (
 ): Promise<void> => {
   void fastify.register(AutoLoad, {
     dir: join(__dirname, 'plugins'),
-    options: {
-      ...options,
-    },
+    options,
   })
   void fastify.register(AutoLoad, {
     dir: join(__dirname, 'routes'),
