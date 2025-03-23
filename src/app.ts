@@ -9,10 +9,12 @@ const app: FastifyPluginAsync<AppOptions> = async (
 ): Promise<void> => {
   void fastify.register(AutoLoad, {
     dir: join(__dirname, 'plugins'),
+    ignorePattern: /test/,
     options,
   })
   void fastify.register(AutoLoad, {
     dir: join(__dirname, 'routes'),
+    ignorePattern: /test/,
     options,
   })
 }
